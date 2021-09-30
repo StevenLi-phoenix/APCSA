@@ -10,13 +10,16 @@ import java.util.Scanner;
 public class Student
 {
     //declare instance data 
-
+    private String name;
+    private Double score1, score2;
+    
     //-----------------------------------------------
     //constructor
     //-----------------------------------------------
     public Student(String studentName)
     {
-	//add body of constructor
+	    //add body of constructor
+        name = studentName;
     }
 
     //-----------------------------------------------
@@ -25,7 +28,13 @@ public class Student
     //-----------------------------------------------
     public void inputGrades()
     {
-	//add body of inputGrades
+	    //add body of inputGrades
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter's Joe's score for test1");
+        score1 = scan.nextDouble();
+        System.out.println("Enter's "+name+"'s score for test2");
+        score2 = scan.nextDouble();
+        System.out.println("Input done.");
     }
 
     //-----------------------------------------------
@@ -33,8 +42,11 @@ public class Student
     //-----------------------------------------------
 
     //add header for getAverage
+    public Double getAverage()
     {
-	//add body of getAverage
+	    //add body of getAverage
+        return (score1 + score2)/2;
+        
     }
 
     //-----------------------------------------------
@@ -42,8 +54,10 @@ public class Student
     //-----------------------------------------------
 
     //add header for printName
+    public String getName()
     {
-	//add body of printName
+	    //add body of printName
+        return name;
     }
 
 }
