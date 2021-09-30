@@ -30,11 +30,12 @@ public class Student
     {
 	    //add body of inputGrades
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter's Joe's score for test1");
+        System.out.println("Enter's "+name+"'s score for test1");
         score1 = scan.nextDouble();
         System.out.println("Enter's "+name+"'s score for test2");
         score2 = scan.nextDouble();
         System.out.println("Input done.");
+        scan.close();
     }
 
     //-----------------------------------------------

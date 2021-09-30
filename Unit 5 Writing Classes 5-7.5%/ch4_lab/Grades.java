@@ -15,11 +15,12 @@ public class Grades
 		//input grades for Mary
 		student1.inputGrades();
 		//print average for Mary
-		System.out.println(student1.getAverage());
+		System.out.println(student1);
+		System.out.println("The average score for "+student1.getName()+" is: "+student1.getAverage());
 
 		//input grades for Mike
 		student2.inputGrades();
 		//print average for Mike
-		System.out.println(student2.getAverage());
+		System.out.println("The average score for "+student2.getName()+" is: "+student2.getAverage());
 	}
 }
