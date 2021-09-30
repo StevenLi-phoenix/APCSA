@@ -1,0 +1,22 @@
+Band Booster Class
+
+In this exercise, you will write a class that models a band booster and use your class to update sales of band candy. 
+
+1.	Write the BandBooster class assuming a band booster object is described by two pieces of instance data: name (a String) and boxesSold (an integer that represents the number of boxes of band candy the booster has sold in the band fundraiser). The class should have the following methods: 
+¡¤	A constructor that has one parameter—a String containing the name of the band booster. The constructor should set boxesSold to 0. 
+¡¤	A method getName that returns the name of the band booster (it has no parameters). 
+¡¤	A method updateSales that takes a single integer parameter representing the number of additional boxes of candy sold. The method should add this number to boxesSold. 
+¡¤	A toString method that returns a string containing the name of the band booster and the number of boxes of candy sold in a format similar to the following: 
+
+          Joe:  16 boxes
+
+2.	Write a program that uses BandBooster objects to track the sales of 2 band boosters over 3 weeks. Your program should do the following: 
+¡¤	Read in the names of the two band boosters and construct an object for each. 
+¡¤	Prompt for and read in the number of boxes sold by each booster for each of the three weeks.  Your prompts should include the booster's name as stored in the BandBooster object. For example, 
+
+Enter the number of boxes sold by Joe this week:
+
+For each member, after reading in the weekly sales, invoke the updateSales method to update the total sales by that member. 
+¡¤	After reading the data, print the name and total sales for each member (you will implicitly use the toString method here). 
+
+
