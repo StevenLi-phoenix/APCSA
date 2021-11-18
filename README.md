@@ -5,11 +5,10 @@ This repository is only for storage and should not be edit, copy and execute.
 
 You mustn't copy and paste this to your own homework.
 
-# visit [MYWEBSITE](https://test.lishuyu.top) and [CONTACT ME](mailto:lishuyustevenli@163.com) to get permission to use the work
+# visit [MYWEBSITE](http://test.lishuyu.top/main.html) and [CONTACT ME](mailto:lishuyustevenli@163.com) to get permission to use the work
 
-![71347042_p0](https://user-images.githubusercontent.com/75846119/135377355-fc8eee23-b514-4498-8ed7-13076eb1705a.jpeg)
+![下载](https://user-images.githubusercontent.com/75846119/142117679-c01859da-6d5a-48de-b633-3cb407d5cc2a.jpeg)
 
 have a pleasent day!!!
 
 
-Fucking java class config!!!
