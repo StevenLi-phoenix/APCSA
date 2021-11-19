@@ -105,7 +105,16 @@ public class IntArrayWorker
     /**complete the mehtod to returns the count of the number of times 
       *a passed integer value (checkNum) is found in the matrix
     **/
-    
+    for(int i = 0; i<matrix.length;i++)
+    {
+      for(int j = 0; j<matrix[i].length; j++)
+      {
+        if(matrix[i][j] == checkNum)
+        {
+          count++;
+        }
+      }
+    }
     return count;
   }
   
@@ -114,6 +123,16 @@ public class IntArrayWorker
     int largest = 0;
     /**complete the mehtod to returns the largest value in the matrix
     **/
+    for(int i = 0; i<matrix.length;i++)
+    {
+      for(int j = 0; j<matrix[i].length; j++)
+      {
+        if(matrix[i][j] > largest)
+        {
+          largest = matrix[i][j];
+        }
+      }
+    }
     return largest;
   }
   
@@ -123,6 +142,10 @@ public class IntArrayWorker
     /**complete the mehtod to returns returns the total of all integers 
      * in a specified column
     **/
+    for(int i = 0; i<matrix.length;i++)
+    {
+      total += matrix[i][col];
+    }
     return total;
   }
 }
