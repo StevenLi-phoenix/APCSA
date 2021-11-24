@@ -45,11 +45,12 @@ public class PictureTester
   }
   
   /** Method to test fixUnderwater */
-  public static void testFixUnderwater()
+  public static void testFixUnderwater(double sc)
   {
-    Picture water = new Picture("images/25754910_p0.png");
+    // Picture water = new Picture("images/25754910_p0.png");
+    Picture water = new Picture("images/water.jpg");
     water.explore();
-    water.fixUnderwater();
+    water.fixUnderwater(sc);
     water.explore();
   }
   
@@ -134,6 +135,22 @@ public class PictureTester
     canvas.createCollage();
     canvas.explore();
   }
+
+  /** Method to test the partCopy method */
+  public static void testPartCopy()
+  {
+    Picture canvas = new Picture("images/640x480.jpg");
+    canvas.createPartCollage();
+    canvas.explore();
+  }
+
+  /** Method to test MyCollage */
+  public static void testMyCollage()
+  {
+    Picture canvas = new Picture("images/640x480.jpg");
+    canvas.Mycollage();
+    canvas.explore();
+  }
   
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
@@ -156,20 +173,23 @@ public class PictureTester
     //testKeepOnlyGreen();
     //testNegate();
     //testGrayscale();
-    //testFixUnderwater();
+    //testFixUnderwater(.5);
     //testMirrorVertical();
     //testMirrorVerticalRightToLeft();
     //testMirrorHorizontal();
     //testMirrorHorizontalBotToTop();
 
     //testMirrorDiagonal();
-
+    //A7
     //testMirrorTemple(); 
     //testMirrorArms();  
     //testMirrorGull();
-    
+    //A8
     //testCollage();
-    //testEdgeDetection();
+    //testPartCopy();
+    //testMyCollage();
+    //A9
+    testEdgeDetection();
     
     //DigitalPicture p = new DigitalPicture();
     //DigitalPicture p1 = new SimplePicture();

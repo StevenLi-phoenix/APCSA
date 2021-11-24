@@ -147,34 +147,66 @@ public class Picture extends SimplePicture
   }
   
   /** Method to fix the underwater picture */
-  public void fixUnderwater()
+  public void fixUnderwater(double sc)
   {
     Pixel[][] pixels = this.getPixels2D();
-    int max_Blue = 0, min_Blue = 255;
-    int max_Green = 0, min_Green = 255;
-    int max_Red = 0, min_Red = 255;
+    Double[][][] picture_array = new Double[pixels.length][pixels[0].length][3];
+    int sum_Red = 0, sum_Green = 0, sum_Blue = 0;
+    double max_Blue = 0, min_Blue = 255, max_Green = 0, min_Green = 255, max_Red = 0, min_Red = 255;
+    double avg_Red, avg_Green, avg_Blue;
+    int count = 0;
     for (Pixel[] rowArray : pixels)
     {
       for (Pixel pixelObj : rowArray)
       {
-        if(pixelObj.getBlue() > max_Blue){max_Blue = pixelObj.getBlue();}
-        if(pixelObj.getBlue() < min_Blue){min_Blue = pixelObj.getBlue();}
-        if(pixelObj.getGreen() > max_Green){max_Green = pixelObj.getGreen();}
-        if(pixelObj.getGreen() < min_Green){min_Green = pixelObj.getGreen();}
-        if(pixelObj.getRed() > max_Red){max_Red = pixelObj.getRed();}
-        if(pixelObj.getRed() < min_Red){min_Red = pixelObj.getRed();}
+        count++;
+        sum_Red += pixelObj.getRed();
+        sum_Green += pixelObj.getGreen();
+        sum_Blue += pixelObj.getBlue();
       }
     }
-    for (Pixel[] rowArray : pixels)
+    avg_Blue = sum_Blue/count;
+    avg_Green = sum_Green/count;
+    avg_Red = sum_Red/count;
+    
+    for(int row = 0; row < pixels.length;row++)
     {
-      for (Pixel pixelObj : rowArray)
+      for(int col = 0; col<pixels[0].length; col++)
       {
+        picture_array[row][col][0] = (double)pixels[row][col].getRed();
+        picture_array[row][col][1] = (double)pixels[row][col].getBlue();
+        picture_array[row][col][2] = (double)pixels[row][col].getGreen();
+      }
+    }
+
+    for(int row = 0; row < pixels.length;row++)
+    {
+      for(int col = 0; col<pixels[0].length; col++)
+      {
+        Pixel pixelObj = pixels[row][col];
+        picture_array[row][col][0] = Math.pow(Math.abs((int)(avg_Red - pixelObj.getRed())),sc);
+        picture_array[row][col][1] = Math.pow(Math.abs((int)(avg_Blue - pixelObj.getBlue())),sc);
+        picture_array[row][col][2] = Math.pow(Math.abs((int)(avg_Green - pixelObj.getGreen())),sc);
+        if(picture_array[row][col][1] > max_Blue){max_Blue = picture_array[row][col][1];}
+        if(picture_array[row][col][1] < min_Blue){min_Blue = picture_array[row][col][1];}
+        if(picture_array[row][col][2] > max_Green){max_Green = picture_array[row][col][2];}
+        if(picture_array[row][col][2] < min_Green){min_Green = picture_array[row][col][2];}
+        if(picture_array[row][col][0] > max_Red){max_Red = picture_array[row][col][0];}
+        if(picture_array[row][col][0] < min_Red){min_Red = picture_array[row][col][0];}
+      }
+    }
+
+    for(int row = 0; row < pixels.length;row++)
+    {
+      for(int col = 0; col<pixels[0].length; col++)
+      {
+        Pixel pixelObj = pixels[row][col];
         double coef_R = 255/(max_Red-min_Red);
         double coef_B = 255/(max_Blue-min_Blue);
         double coef_G = 255/(max_Green-min_Green);
-        pixelObj.setRed((int)((pixelObj.getRed()-min_Red)*coef_R));
-        pixelObj.setBlue((int)((pixelObj.getBlue()-min_Blue)*coef_B));
-        pixelObj.setGreen((int)((pixelObj.getGreen()-min_Green)*coef_G));
+        pixelObj.setRed((int)((picture_array[row][col][0]-min_Red)*coef_R));
+        pixelObj.setBlue((int)((picture_array[row][col][1]-min_Blue)*coef_B));
+        pixelObj.setGreen((int)((picture_array[row][col][2]-min_Green)*coef_G));
       }
     }
   }
@@ -361,8 +393,7 @@ public class Picture extends SimplePicture
     * @param startRow the start row to copy to
     * @param startCol the start col to copy to
     */
-  public void copy(Picture fromPic, 
-                 int startRow, int startCol)
+  public void copy(Picture fromPic,int startRow, int startCol)
   {
     Pixel fromPixel = null;
     Pixel toPixel = null;
@@ -375,6 +406,38 @@ public class Picture extends SimplePicture
     {
       for (int fromCol = 0, toCol = startCol; 
            fromCol < fromPixels[0].length &&
+           toCol < toPixels[0].length;  
+           fromCol++, toCol++)
+      {
+        fromPixel = fromPixels[fromRow][fromCol];
+        toPixel = toPixels[toRow][toCol];
+        toPixel.setColor(fromPixel.getColor());
+      }
+    }   
+  }
+
+  /** copy from the passed fromPic to the
+    * specified startRow and startCol in the
+    * current picture
+    * @param fromPic the picture to copy from
+    * @param startRow the start row to copy to
+    * @param startCol the start col to copy to
+    * @param endRow the end row to copy to
+    * @param endCol the end col to copy to
+    */
+  public void copy(Picture fromPic, int startRow, int startCol, int endRow, int endCol)
+  {
+    Pixel fromPixel = null;
+    Pixel toPixel = null;
+    Pixel[][] toPixels = this.getPixels2D();
+    Pixel[][] fromPixels = fromPic.getPixels2D();
+    for (int fromRow = 0, toRow = startRow; 
+         (fromRow < endRow && fromRow < fromPixels.length) &&
+         toRow < toPixels.length; 
+         fromRow++, toRow++)
+    {
+      for (int fromCol = 0, toCol = startCol; 
+           (fromCol < endCol && fromCol < fromPixels[0].length) &&
            toCol < toPixels[0].length;  
            fromCol++, toCol++)
       {
@@ -401,6 +464,33 @@ public class Picture extends SimplePicture
     this.mirrorVertical();
     this.write("collage.jpg");
   }
+
+   /** Method to create a collage of several pictures */
+   public void createPartCollage()
+   {
+     Picture flower1 = new Picture("images/flower1.jpg");
+     Picture flower2 = new Picture("images/flower2.jpg");
+     this.copy(flower1,0,0,50,50);
+     this.copy(flower2,100,0,150,50);
+     this.copy(flower1,200,0,250,50);
+     Picture flowerNoBlue = new Picture(flower2);
+     flowerNoBlue.zeroBlue();
+     this.copy(flowerNoBlue,300,0,350,50);
+     this.copy(flower1,400,0,450,50);
+     this.copy(flower2,500,0,550,50);
+     this.mirrorVertical();
+     this.write("collage.jpg");
+   }
+
+  /** Method Mycollage */
+  public void Mycollage()
+  {
+    Picture flower1 = new Picture("images/flower1.jpg");
+    this.copy(flower1,0,0);
+    this.copy(flower1,100,0);
+    this.copy(flower1,200,0);
+    this.mirrorVertical();
+  }
   
   
   /** Method to show large changes in color 
@@ -410,23 +500,44 @@ public class Picture extends SimplePicture
   {
     Pixel leftPixel = null;
     Pixel rightPixel = null;
+    Pixel topPixel = null;
+    Pixel botPixel = null;
+    Pixel topPixel_copy = null;
+    Pixel botPixel_copy = null;
+
     Pixel[][] pixels = this.getPixels2D();
+    Pixel[][] pixels_copy = this.getPixels2D();
     Color rightColor = null;
+    Color botColor = null;
     for (int row = 0; row < pixels.length; row++)
     {
-      for (int col = 0; 
-           col < pixels[0].length-1; col++)
+      for (int col = 0;col < pixels[0].length-1; col++)
       {
         leftPixel = pixels[row][col];
         rightPixel = pixels[row][col+1];
         rightColor = rightPixel.getColor();
-        if (leftPixel.colorDistance(rightColor) > 
-            edgeDist)
+        if (leftPixel.colorDistance(rightColor) > edgeDist)
           leftPixel.setColor(Color.BLACK);
         else
           leftPixel.setColor(Color.WHITE);
       }
     }
+    for (int col = 0;col < pixels[0].length; col++)
+    {
+      for (int row = 0; row < pixels.length-1; row++)
+      {
+        topPixel = pixels[row][col];
+        botPixel = pixels[row+1][col];
+        topPixel_copy = pixels_copy[row][col];
+        botPixel_copy = pixels_copy[row+1][col];
+        botColor = botPixel_copy.getColor();
+        if (topPixel_copy.colorDistance(botColor) > edgeDist)
+        topPixel.setColor(Color.BLACK);
+      }
+    }
+    /** Methid that new  */
+
+
   }
   
   
