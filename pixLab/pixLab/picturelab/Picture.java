@@ -3,6 +3,7 @@ import java.awt.font.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.text.*;
+import java.time.Year;
 import java.time.chrono.MinguoChronology;
 import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List
@@ -535,9 +536,62 @@ public class Picture extends SimplePicture
         topPixel.setColor(Color.BLACK);
       }
     }
-    /** Methid that new  */
+  }
+  // 返回灰度整数数组
+  public Integer[][] grayscalePolymerization()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Integer[][] out = new Integer[pixels.length][pixels[0].length];
+    for(int row = 0; row < pixels.length;row++){
+      for(int col = 0; col<pixels[0].length; col++){
+        out[row][col] = (int)pixels[row][col].getAverage();
+      }
+    }
+    return out;
+  }
 
-
+  /** Methid that edge detection custom */
+  public void edgeDetectionPro(){
+    Pixel[][] pixels = this.getPixels2D();
+    int size = 3;
+    //Krisch算子卷积核
+    double[][] krischN = {{5,5,5},{-3,0,-3},{-3,-3,-3}};
+    double[][] krischNE = {{-3,5,5},{-3,0,5},{-3,-3,-3}};
+    double[][] krischE = {{-3,-3,5},{-3,0,5},{-3,-3,5}};
+    double[][] krischSE = {{-3,-3,-3},{-3,0,5},{-3,5,5}};
+    double[][] krischS = {{-3,-3,-3},{-3,0,-3},{5,5,5}};
+    double[][] krischSW = {{-3,-3,-3},{5,0,-3},{5,5,-3}};
+    double[][] krischW = {{5,-3,-3},{5,0,-3},{5,-3,-3}};
+    double[][] krischNW = {{5,5,-3},{5,0,-3},{-3,-3,-3}};
+    //首先将图片灰度化
+    Integer[][] pixels2 = this.grayscalePolymerization();
+    for(int x = 0;x < pixels.length-size+1;x++){
+      for(int y = 0;y < pixels[0].length-size+1;y++){
+        //设置一个数组存储八个方向的值,按顺时针方向从北极开始
+        int[] temp = {0,0,0,0,0,0,0,0};
+        //对size*size区域进行卷积操作
+        for(int i = 0;i < size;i++){
+          for(int j = 0;j < size;j++){
+            temp[0] += pixels2[x+i][y+j]*krischN[i][j];
+            temp[1] += pixels2[x+i][y+j]*krischNE[i][j];
+            temp[2] += pixels2[x+i][y+j]*krischE[i][j];
+            temp[3] += pixels2[x+i][y+j]*krischSE[i][j];
+            temp[4] += pixels2[x+i][y+j]*krischS[i][j];
+            temp[5] += pixels2[x+i][y+j]*krischSW[i][j];
+            temp[6] += pixels2[x+i][y+j]*krischW[i][j];
+            temp[7] += pixels2[x+i][y+j]*krischNW[i][j];
+          }
+        }
+        ;
+        //找出八个方向的最大值（代码为数组列表求最大值）
+        int result = Arrays.stream(temp).max().getAsInt();
+        //若是求得结果超出灰度值的0-255范围，将其设成最大值或最小值
+        if(result > 255)result = 255;
+        if(result < 0)result = 0;
+        //设置反向灰度
+        pixels[x][y].setColor(new Color(255 - result, 255 - result ,255 - result));
+      }
+    }
   }
   
   
