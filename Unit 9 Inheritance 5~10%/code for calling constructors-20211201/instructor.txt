@@ -1,0 +1,27 @@
+FRQ
+在此挑战中，您将提供一个名为 Rectangle 的类，该类具有两个实例变量（长度和宽度）以及两个初始化它们的构造函数，以及一个名为 draw() 的方法，该方法使用嵌套循环绘制一个长 x 宽的星星矩形。
+您将编写一个继承自 Rectangle 的名为 Square 的新类。正方形是长方形吗是的！正方形是长宽相等的长方形。 Square 将继承 length、width 和 draw 方法。您将编写调用 Rectangle 构造函数的方形构造函数。
+
+1.使下面的类 Square 继承自 Rectangle
+2.添加一个 Square 无参数构造函数，它使用 super() 调用 Rectangle 的构造函数。
+3.为使用super调用带有2个参数的Rectangle的构造函数的一侧添加一个带有1个参数的Square构造函数。
+4.取消注释main方法中的对象以测试绘制正方形。
+
+//补充问题：
+5.在Rectangle中添加一个area()方法来计算矩形的面积。它也适用于正方形吗？测试一下。
+6.添加另一个名为 LongRectangle 的子类，它继承自 Rectangle 但有一个附加条件，即长度始终是宽度的 2 倍。为其编写构造函数并对其进行测试。
+
+
+ORG:
+FRQ
+In this challenge, you are giving a class called Rectangle that has two instance variables, length and width, and two constructors that initialize them, and a method called draw() that uses nested loops to draw a length x width rectangle of stars. 
+You will write a new class called Square that inherits from Rectangle. Is a square a rectangle? Yes! A square is a rectangle where the length and width are equal. Square will inherit length, width, and the draw method. You will write square constructors that will call the Rectangle constructors.
+
+1.Make the class Square below inherit from Rectangle
+2.Add a Square no-argument constructor that calls Rectangle’s constructor using super().
+3.Add a Square constructor with 1 argument for a side that calls Rectangle’s constructor with 2 arguments using super.
+4.Uncomment the objects in the main method to test drawing the squares.
+
+//Additional questions:
+5.Add an area() method to Rectangle that computes the area of the rectangle. Does it work for squares too? Test it.
+6.Add another subclass called LongRectangle which inherits from Rectangle but has the additional condition that the length is always 2 x the width. Write constructors for it and test it out.
