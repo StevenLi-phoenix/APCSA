@@ -8,9 +8,9 @@
 
 public class ListTest
 {
-    public static void main(String[] args)
+public static void main(String[] args)
     {
-	IntList myList = new IntList(10);
+	SortedIntList myList = new SortedIntList(10);
 	myList.add(100);
 	myList.add(50);
 	myList.add(200);
