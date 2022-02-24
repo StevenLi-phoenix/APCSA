@@ -6,4 +6,7 @@ public class Main{
         System.out.println(Mom.getName()); 
         System.out.println(Dad.getName());
     }
+    public boolean printInfo(){
+        return true;
+    }
 }
