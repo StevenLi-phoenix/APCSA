@@ -2,6 +2,13 @@ public class testExtention {
     public static void main(String[] args) {
         base b = new extention();
         b.leap();
+
+        int ctrl = 691;
+        if(ctrl>0)
+            if(ctrl%2==0)
+                System.out.println("Even");
+        else
+            System.out.println("Invalid");
     }
 }
 
