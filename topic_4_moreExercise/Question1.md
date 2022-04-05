@@ -4,6 +4,7 @@
 
 The LightBoard class models a two-dimensional display of lights, where each light is either on or off, as represented by a Boolean value. You will implement a constructor to initialize the display and a method to evaluate a light.
 
+```java
 public class LightBoard
 {
 /** The lights on the board, where true represents on and false represents off. */
@@ -25,11 +26,15 @@ public boolean evaluateLight(int row, int col)
 { /* to be implemented in part (b) */ }
 // There may be additional instance variables, constructors, and methods not shown.
 }
+```
+
 (a)
 Write the constructor for the LightBoard class, which initializes lights so that each light is set to on with a
 40% probability. The notation lights[r][c] represents the array element at row r and column c.
 
 Complete the LightBoard constructor below.
+
+```java
 /** Constructs a LightBoard object having numRows rows and numCols
 columns.
 
@@ -37,6 +42,7 @@ columns.
 * Postcondition: Postcondition: each light has a 40% probability of being set to on.
 */
 public LightBoard(int numRows, int numCols)
+```
 
 (b)
 Write the method evaluateLight, which computes and returns the status of a light at a given row and column
@@ -50,6 +56,8 @@ For example, suppose that LightBoard sim = new LightBoard(7, 5) creates a light 
 state shown below, where true represents a light that is on and false represents a light that is off. Lights that are off are shaded.
   
 Complete the evaluateLight method below.
+
+```java
 /** Evaluates a light in row index row and column index col and returns a
 status
 
@@ -57,3 +65,4 @@ status
 * Precondition: Precondition: row and col are valid indexes in lights.
 */
 public boolean evaluateLight(int row, int col)
+```
