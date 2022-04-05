@@ -6,6 +6,7 @@
  * 
  * @author Barbara Ericson 
  */
+package pixLab.pixLab.picturelab;
 public class PictureTester
 {
   /** Method to test zeroBlue */

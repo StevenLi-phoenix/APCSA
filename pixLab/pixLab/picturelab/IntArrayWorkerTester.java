@@ -1,3 +1,4 @@
+package pixLab.pixLab.picturelab;
 public class IntArrayWorkerTester
 {
   /** method to test setMatrix */

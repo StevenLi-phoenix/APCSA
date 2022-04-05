@@ -1,3 +1,4 @@
+package Spellcheck;
 import java.util.*;
 
 class Main {

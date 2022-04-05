@@ -1,3 +1,5 @@
+package pixLab.pixLab.picturelab;
+
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 

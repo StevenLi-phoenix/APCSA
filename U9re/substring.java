@@ -1,3 +1,4 @@
+package U9re;
 public class substring {
     public static void mys(String s){
         if(s.length()>1){
