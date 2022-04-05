@@ -1,4 +1,6 @@
-2013 真题
+# 2013 真题
+
+[back](README.md)
 
 A telescope scans a rectangular area of the night sky and collects the data into a 1-dimensional array. Each data value scanned is a number representing the amount of light detected by the telescope. The telescope scans back and forth across the sky (alternating between left to right and right to left) in the pattern indicated below by the arrows. The back-and-forth ordering of the values received from the scan is called telescope order.
 The telescope records the data in telescope order into a 1-dimensional array of double values. This 1-dimensional array of information received from a single scan will be transferred into a 2-dimensional array, which reconstructs the original view of the rectangular area of the sky. This 2-dimensional array is part of the SkyView class, shown below. In this question you will write a constructor and a method for this class.
